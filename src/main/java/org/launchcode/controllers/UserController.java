@@ -23,10 +23,14 @@ public class UserController {
         UserData.addUser(user);
         model.addAttribute("user", user);
         model.addAttribute("verify", verify);
+        model.addAttribute("username", user.getUsername());
+        model.addAttribute("email", user.getEmail());
         if(user.getPassword().equals(verify)){
             return "user/index";
         } else {
-            return "redirect:user/add";
+            String error = "Passwords must match";
+            model.addAttribute("error", error);
+            return "/user/add";
         }
     }
 
